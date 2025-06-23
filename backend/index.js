@@ -8,7 +8,7 @@ const userRoutes = require("./src/User/user.router");
 
 // CORS configuration - More secure for credentials
 app.use(cors({
-  origin: 'http://localhost:5173', // Allow only the frontend origin
+  origin: 'https://book-store-rouge-nine.vercel.app', // Allow only the deployed frontend origin
   credentials: true, // Allow credentials (cookies, auth headers)
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']

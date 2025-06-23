@@ -4,6 +4,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import CartPage from "../pages/cart/CartPage";
 import CheckoutPage from "../pages/checkout/CheckoutPage";
+import Profile from '../components/Profile';
 
 function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ function AppRoutes() {
       <Route path="/register" element={<Register/>}/>
       <Route path="/cart" element={<CartPage/>}/>
       <Route path="/checkout" element={<CheckoutPage/>}/>
+      <Route path="/profile" element={<Profile/>}/>
     </Routes>
   );
 }

@@ -1,17 +1,23 @@
 import React from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import getImg from "../../utils/getImg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 
 
 const BookCard = ({ book }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleAddToCart = ()=>{
-        dispatch(addToCart(book))
-    }
+    const handleAddToCart = () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            dispatch(addToCart(book));
+        } else {
+            navigate("/login");
+        }
+    };
   return (
     <div className=" rounded-lg transition-shadow duration-300">
         <div

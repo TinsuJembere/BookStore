@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiBars3CenterLeft } from "react-icons/hi2";
 import { IoIosSearch } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import avatarImg from "../assets/avatar.png";
 import { FiHeart } from "react-icons/fi";
@@ -10,7 +10,8 @@ import { useSelector } from "react-redux";
 
 function Navbar() {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-  const currentUser = false;
+  const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
   const navigation = [
     { name: "Dashboard", href: "/dashboard" },
     { name: "Orders", href: "/orders" },
@@ -18,6 +19,16 @@ function Navbar() {
     { name: "Check Out", href: "/checkout" },
   ];
   const cartQuantity = useSelector((state) => state.cart.totalQuantity);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setCurrentUser(JSON.parse(storedUser));
+    } else {
+      setCurrentUser(null);
+    }
+  }, []);
+
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6">
       <nav className="flex justify-between items-center">
@@ -40,7 +51,7 @@ function Navbar() {
           <div>
             {currentUser ? (
               <>
-                <button onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
+                <button onClick={() => navigate('/profile')}>
                   <img
                     src={avatarImg}
                     alt="user avatar"
